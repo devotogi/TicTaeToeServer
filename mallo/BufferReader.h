@@ -12,6 +12,7 @@ public:
 	void Read(T& data);
 
 	void ReadWString(WCHAR* str, int32 strSize);
+	void ReadWString(char* str, int32 strSize);
 
 	int32 GetReadSize() { return _readPos; }
 };

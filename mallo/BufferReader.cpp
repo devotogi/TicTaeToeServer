@@ -14,3 +14,9 @@ void BufferReader::ReadWString(WCHAR* str, int32 strSize)
 	::memcpy(str, &_buffer[_readPos], strSize);
 	_readPos += strSize;
 }
+
+void BufferReader::ReadWString(char* str, int32 strSize)
+{
+	::memcpy(str, &_buffer[_readPos], strSize);
+	_readPos += strSize;
+}

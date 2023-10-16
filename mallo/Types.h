@@ -48,6 +48,13 @@ public:
 
 struct PacketHeader
 {
-	__int16 _type = 0;
 	__int16 _pktSize = 0;
+	__int16 _type = 0;
+};
+
+enum PacketType : __int16
+{
+	S2C_CLIENTINIT,
+	C2S_CLIENTINIT,
+	C2S_CLIENTREADY,
 };
