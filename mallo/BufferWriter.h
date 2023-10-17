@@ -15,6 +15,7 @@ public:
 	void Write(T data);
 
 	void WriteWString(WCHAR* str, int32 strSize);
+	void WriteWString(char* str, int32 strSize);
 
 	int32 GetWriterSize() { return _writePos; }
 

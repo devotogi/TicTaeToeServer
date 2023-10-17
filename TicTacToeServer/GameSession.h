@@ -20,6 +20,13 @@ public:
 	void SetUDPPort(int udpPort) { _udpPort = udpPort; };
 	void SetRoom(Room* room) { _room = room; }
 	Room* GetRoom() { return _room; }
+	void SendOtherPlayerUDPIP(GameSession* session);
+
+	int GetLocalIpSize() { return _localIpSize; }
+	int GetPublicIpSize() { return _publicIpSize; }
+	char* GetLocalIp() { return _localIp; }
+	char* GetPublicIp() { return _publicIp; }
+	int GetPort() { return _udpPort; }
 
 public:
 	GameSession(const SOCKET& socket, const SOCKADDR_IN& sock);

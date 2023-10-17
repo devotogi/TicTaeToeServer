@@ -16,3 +16,10 @@ void BufferWriter::WriteWString(WCHAR* str, int32 strSize)
 	::memcpy(startStr, str, strSize);
 	_writePos += strSize;
 }
+
+void BufferWriter::WriteWString(char* str, int32 strSize)
+{
+	char* startStr = reinterpret_cast<char*>(&_buffer[_writePos]);
+	::memcpy(startStr, str, strSize);
+	_writePos += strSize;
+}
