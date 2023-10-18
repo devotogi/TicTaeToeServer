@@ -7,6 +7,7 @@
     <ClInclude Include="SessionManager.h" />
     <ClInclude Include="Lobby.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="RoomSet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -16,5 +17,6 @@
     <ClCompile Include="SessionManager.cpp" />
     <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="RoomSet.cpp" />
   </ItemGroup>
 </Project>

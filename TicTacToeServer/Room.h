@@ -8,5 +8,6 @@ private:
 	GameSession* _p2;
 public:
 	Room(GameSession* p1, GameSession* p2);
+	~Room();
 };
 

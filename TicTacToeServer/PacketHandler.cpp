@@ -6,6 +6,7 @@
 #include "SessionManager.h"
 #include "Lobby.h"
 #include "Room.h"
+#include "RoomSet.h"
 void PacketHandler::HandlePacket(GameSession* session, BYTE* packet, int32 packetSize)
 {
 	PacketHeader* header = reinterpret_cast<PacketHeader*>(packet);
@@ -20,7 +21,9 @@ void PacketHandler::HandlePacket(GameSession* session, BYTE* packet, int32 packe
 	case C2S_CLIENTREADY:
 		HandlePacket_C2S_CLIENTREADY(session, dataPtr, packetSize);
 		break;
-
+	case C2S_GAME_END:
+		HandlePacket_C2S_GAME_END(session, dataPtr, packetSize);
+		break;
 	}
 }
 
@@ -67,7 +70,19 @@ void PacketHandler::HandlePacket_C2S_CLIENTREADY(GameSession* session, BYTE* pac
 	if (second == nullptr) return;
 
 	Room* room = new Room(session, second);
+	RoomSet::GetInstance()->AddRoom(room);
+
 	session->SetRoom(room);
 	second->SetRoom(room);
 
+}
+
+void PacketHandler::HandlePacket_C2S_GAME_END(GameSession* session, BYTE* packet, int32 packetSize)
+{
+	Room* room = session->GetRoom();
+
+	if (room == nullptr)
+		return;
+
+	RoomSet::GetInstance()->EreaseRoom(room);
 }

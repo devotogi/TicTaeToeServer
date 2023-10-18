@@ -2,6 +2,8 @@
 #include "Lobby.h"
 #include "GameSession.h"
 
+Lobby* Lobby::_instance = nullptr;
+
 void Lobby::AddSession(int32 sessionId, GameSession* session)
 {
 	EnterCriticalSection(&_cs);

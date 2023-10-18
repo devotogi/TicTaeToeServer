@@ -42,6 +42,19 @@ void GameSession::SendGameInfo(GameSession* session, int playerNumber)
 	session->Send(sendBuffer, header->_pktSize);
 }
 
+void GameSession::ExitRoom()
+{
+	BYTE sendBuffer[1000] = {};
+	BufferWriter bw(sendBuffer);
+
+	PacketHeader* header = bw.WriteReserve<PacketHeader>();
+
+	header->_pktSize = bw.GetWriterSize();
+	header->_type = S2C_EXIT_ROOM;
+
+	Send(sendBuffer, header->_pktSize);
+}
+
 GameSession::GameSession(const SOCKET& socket, const SOCKADDR_IN& sock) : Session(socket, sock)
 {
 }

@@ -27,6 +27,8 @@ public:
 	char* GetPublicIp() { return _publicIp; }
 	int GetPort() { return _udpPort; }
 
+	void ExitRoom();
+
 public:
 	GameSession(const SOCKET& socket, const SOCKADDR_IN& sock);
 	virtual ~GameSession();
