@@ -17,7 +17,7 @@ void GameSession::SetPublicIp(char* publicIp, int publicIpSize)
 	::memcpy(_publicIp, publicIp, publicIpSize);
 }
 
-void GameSession::SendOtherPlayerUDPIP(GameSession* session)
+void GameSession::SendGameInfo(GameSession* session, int playerNumber)
 {
 	BYTE sendBuffer[1000] = {};
 	BufferWriter bw(sendBuffer);
@@ -34,6 +34,7 @@ void GameSession::SendOtherPlayerUDPIP(GameSession* session)
 	bw.Write(publicIpSize);
 	bw.WriteWString(publicIp, publicIpSize);
 	bw.Write(port);
+	bw.Write(playerNumber);
 
 	header->_pktSize = bw.GetWriterSize();
 	header->_type = S2C_UDPINFO;

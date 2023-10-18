@@ -20,8 +20,7 @@ public:
 	void SetUDPPort(int udpPort) { _udpPort = udpPort; };
 	void SetRoom(Room* room) { _room = room; }
 	Room* GetRoom() { return _room; }
-	void SendOtherPlayerUDPIP(GameSession* session);
-
+	void SendGameInfo(GameSession* session, int playerNumber);
 	int GetLocalIpSize() { return _localIpSize; }
 	int GetPublicIpSize() { return _publicIpSize; }
 	char* GetLocalIp() { return _localIp; }
