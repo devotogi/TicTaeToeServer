@@ -13,6 +13,8 @@ void RoomSet::AddRoom(Room* room)
 
 void RoomSet::EreaseRoom(Room* room)
 {
+	if (room == nullptr) return;
+
 	EnterCriticalSection(&_cs);
 	
 	if (_set.count(room) == 0)

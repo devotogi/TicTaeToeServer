@@ -4,7 +4,7 @@
 #include "BufferWriter.h"
 #include "PacketHandler.h"
 #include "Lobby.h"
-
+#include "RoomSet.h"
 void GameSession::SetLocalIp(char* localIp, int localIpSize)
 {
 	_localIpSize = localIpSize;
@@ -73,6 +73,7 @@ void GameSession::OnDisconnect()
 {
 	Lobby::GetInstance()->PopSession(_sessionId);
 	SessionManager::GetInstance()->PopSession(_sessionId);
+	RoomSet::GetInstance()->EreaseRoom(_room);
 }
 
 void GameSession::OnConnect()

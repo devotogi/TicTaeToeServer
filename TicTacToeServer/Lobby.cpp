@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Lobby.h"
 #include "GameSession.h"
-
+#include "RoomSet.h"
 Lobby* Lobby::_instance = nullptr;
 
 void Lobby::AddSession(int32 sessionId, GameSession* session)
@@ -61,4 +61,37 @@ GameSession* Lobby::GetSessionRandom(GameSession* session)
 
 	LeaveCriticalSection(&_cs);
 	return ret;
+}
+
+void Lobby::MatchSession(GameSession* session)
+{
+	EnterCriticalSection(&_cs);
+	
+	if (session->GetRoom() != nullptr) 
+	{
+		LeaveCriticalSection(&_cs);
+		return;
+	}
+
+	GameSession* find = Lobby::GetInstance()->GetSession(session->GetSessionID());
+
+	if (find == nullptr)
+		Lobby::GetInstance()->AddSession(session->GetSessionID(), session);
+	
+
+	GameSession* second = Lobby::GetInstance()->GetSessionRandom(session);
+
+	if (second == nullptr) 
+	{
+		LeaveCriticalSection(&_cs);
+		return;
+	}
+
+	Room* room = new Room(session, second);
+	RoomSet::GetInstance()->AddRoom(room);
+
+	session->SetRoom(room);
+	second->SetRoom(room);
+
+	LeaveCriticalSection(&_cs);
 }

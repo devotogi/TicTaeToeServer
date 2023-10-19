@@ -58,23 +58,11 @@ void PacketHandler::HandlePacket_C2S_CLIENTINIT(GameSession* session, BYTE* pack
 
 void PacketHandler::HandlePacket_C2S_CLIENTREADY(GameSession* session, BYTE* packet, int32 packetSize)
 {
+	cout << "Client Room Request " << endl;
+	
 	if (session->GetRoom() != nullptr) return;
 
-	GameSession* find = Lobby::GetInstance()->GetSession(session->GetSessionID());
-
-	if (find == nullptr)
-		Lobby::GetInstance()->AddSession(session->GetSessionID(), session);
-	
-	GameSession* second = Lobby::GetInstance()->GetSessionRandom(session);
-
-	if (second == nullptr) return;
-
-	Room* room = new Room(session, second);
-	RoomSet::GetInstance()->AddRoom(room);
-
-	session->SetRoom(room);
-	second->SetRoom(room);
-
+	Lobby::GetInstance()->MatchSession(session);
 }
 
 void PacketHandler::HandlePacket_C2S_GAME_END(GameSession* session, BYTE* packet, int32 packetSize)

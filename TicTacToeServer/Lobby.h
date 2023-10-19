@@ -25,6 +25,7 @@ public:
 	void PopSession(int32 sessionId);
 	GameSession* GetSession(int32 sessionId);
 	GameSession* GetSessionRandom(GameSession* session);
+	void MatchSession(GameSession* session);
 
 	static Lobby* GetInstance()
 	{
