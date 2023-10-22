@@ -39,7 +39,7 @@ void GameSession::SendGameInfo(GameSession* session, int playerNumber)
 	header->_pktSize = bw.GetWriterSize();
 	header->_type = S2C_UDPINFO;
 
-	session->Send(sendBuffer, header->_pktSize);
+	Send(sendBuffer, header->_pktSize);
 }
 
 void GameSession::ExitRoom()
